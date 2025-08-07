@@ -47,6 +47,7 @@ export default function RootLayout() {
   if (!isColorSchemeLoaded) {
     return null;
   }
+
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>

@@ -1,0 +1,109 @@
+{
+  // --------------------------------------------------------------------
+  // --- GENERAL SETTINGS FOR THE ENTIRE MONOREPO -----------------------
+  // --------------------------------------------------------------------
+  // Enable format on save for all relevant files.
+  // The correct formatter will be chosen based on the rules below.
+  "editor.formatOnSave": false,
+  "editor.formatOnPaste": false,
+  // Enable the ESLint extension for javascript and typescript files
+  "eslint.validate": [
+    "javascript",
+    "typescript"
+  ],
+  // Silent the stylistic rules in you IDE, but still auto fix them
+  "eslint.rules.customizations": [
+    {
+      "rule": "style/*",
+      "severity": "off",
+      "fixable": true
+    },
+    {
+      "rule": "format/*",
+      "severity": "off",
+      "fixable": true
+    },
+    {
+      "rule": "*-indent",
+      "severity": "off",
+      "fixable": true
+    },
+    {
+      "rule": "*-spacing",
+      "severity": "off",
+      "fixable": true
+    },
+    {
+      "rule": "*-spaces",
+      "severity": "off",
+      "fixable": true
+    },
+    {
+      "rule": "*-order",
+      "severity": "off",
+      "fixable": true
+    },
+    {
+      "rule": "*-dangle",
+      "severity": "off",
+      "fixable": true
+    },
+    {
+      "rule": "*-newline",
+      "severity": "off",
+      "fixable": true
+    },
+    {
+      "rule": "*quotes",
+      "severity": "off",
+      "fixable": true
+    },
+    {
+      "rule": "*semi",
+      "severity": "off",
+      "fixable": true
+    }
+  ],
+  // --------------------------------------------------------------------
+  // --- MOBILE FRONTEND SETTINGS (app/native) --------------------------------
+  // --- Use Prettier as the default formatter. -------------------------
+  // --------------------------------------------------------------------
+  "[javascript][**/app/native/**]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript][**/app/native/**]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact][**/app/native/**]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact][**/app/native/**]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json][**/app/native/**]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[css][**/app/native/**]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  // --------------------------------------------------------------------
+  // --- BACKEND SETTINGS (app/server) ---------------------------------
+  // --- Use ESLint as the default formatter. ---------------------------
+  // --------------------------------------------------------------------
+  "[javascript][**/app/server/**]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+    // This command tells VS Code to run ESLint's autofix on save.
+    // It's crucial for making ESLint act like a formatter.
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "explicit",
+      "source.organizeImports": "never"
+    },
+  },
+  "[typescript][**/app/server/**]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "explicit",
+      "source.organizeImports": "never"
+    },
+  },
+}
