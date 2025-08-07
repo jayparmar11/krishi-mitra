@@ -4,7 +4,6 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  StyleSheet,
   ScrollView,
   KeyboardAvoidingView,
   Platform,
@@ -52,85 +51,59 @@ export default function ChatScreen() {
 
   if (error) {
     return (
-      <View style={styles.container}>
-        <View style={styles.errorContainer}>
-          <Text style={styles.errorText}>Error: {error.message}</Text>
-          <Text style={styles.errorSubText}>
-            Please check your connection and try again.
-          </Text>
+      <View className="flex-1 bg-[#FCFDFD]">
+        <View className="flex-1 justify-center items-center p-5">
+          <Text className="text-lg font-bold text-red-700 text-center mb-2">Error: {error.message}</Text>
+          <Text className="text-base text-gray-600 text-center">Please check your connection and try again.</Text>
         </View>
       </View>
     );
   }
-
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity
-          onPress={() => router.back()}
-          style={styles.backButton}
-        >
+    <View className="flex-1 bg-[#FCFDFD]">
+      <View className="flex-row items-center px-5 pt-12 pb-4 bg-white border-b border-gray-200">
+        <TouchableOpacity onPress={() => router.back()} className="justify-center items-center w-10 h-10">
           <ArrowLeft size={24} color="#264653" strokeWidth={2} />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>AI Assistant</Text>
-        <View style={styles.headerRight} />
+        <Text className="flex-1 text-xl font-bold text-primary text-center">AI Assistant</Text>
+        <View className="w-10" />
       </View>
 
       <KeyboardAvoidingView
-        style={styles.chatContainer}
+        className="flex-1"
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         keyboardVerticalOffset={Platform.OS === "ios" ? 100 : 0}
       >
         <ScrollView
           ref={scrollViewRef}
-          style={styles.messagesContainer}
-          contentContainerStyle={styles.messagesContent}
+          className="flex-1"
+          contentContainerStyle={{ padding: 20, paddingBottom: 10 }}
           showsVerticalScrollIndicator={false}
         >
           {messages.map((message) => (
             <View
               key={message.id}
-              style={[
-                styles.messageContainer,
-                message.role === "user"
-                  ? styles.userMessageContainer
-                  : styles.aiMessageContainer,
-              ]}
+              className={`mb-4 flex-row ${message.role === "user" ? "justify-end" : "justify-start"}`}
             >
               {message.role !== "user" && (
-                <View style={styles.aiAvatar}>
+                <View className="w-8 h-8 rounded-full bg-teal-50 justify-center items-center mr-2 mt-1">
                   <Bot size={16} color="#2A9D8F" strokeWidth={2} />
                 </View>
               )}
               <View
-                style={[
-                  styles.messageBubble,
-                  message.role === "user"
-                    ? styles.userMessage
-                    : styles.aiMessage,
-                ]}
+                className={`max-w-[80%] px-4 py-3 rounded-2xl ${message.role === "user" ? "bg-primary rounded-br-md" : "bg-white border border-gray-200 rounded-bl-md"}`}
               >
-                <Text
-                  style={[
-                    styles.messageText,
-                    message.role === "user"
-                      ? styles.userMessageText
-                      : styles.aiMessageText,
-                  ]}
-                >
-                  {message.content}
-                </Text>
+                <Text className={`text-base leading-6 ${message.role === "user" ? "text-white" : "text-primary"}`}>{message.content}</Text>
               </View>
             </View>
           ))}
         </ScrollView>
 
-        <View style={styles.inputContainer}>
-          <View style={styles.inputWrapper}>
+        <View className="px-5 py-2 bg-white border-t border-gray-200">
+          <View className="flex-row items-end bg-gray-50 rounded-full px-3 py-2 border border-gray-200">
             <TextInput
-              style={styles.textInput}
+              className="flex-1 text-base text-primary max-h-24 pt-1 pb-1 pr-2"
               value={input}
-              // Replace onChangeText with the corrected onChange handler
               onChange={(e) =>
                 handleInputChange({
                   ...e,
@@ -144,20 +117,15 @@ export default function ChatScreen() {
               placeholderTextColor="#9CA3AF"
               multiline
             />
-            <View style={styles.inputActions}>
-              <TouchableOpacity style={styles.actionButton}>
+            <View className="flex-row items-center h-10">
+              <TouchableOpacity className="p-2">
                 <Mic size={20} color="#6B7280" strokeWidth={2} />
               </TouchableOpacity>
-              <TouchableOpacity style={styles.actionButton}>
+              <TouchableOpacity className="p-2">
                 <Camera size={20} color="#6B7280" strokeWidth={2} />
               </TouchableOpacity>
               <TouchableOpacity
-                style={[
-                  styles.sendButton,
-                  input.trim()
-                    ? styles.sendButtonActive
-                    : styles.sendButtonDisabled,
-                ]}
+                className={`w-9 h-9 rounded-full justify-center items-center ml-1 ${input.trim() ? "bg-primary" : "bg-gray-400"}`}
                 onPress={() => handleSubmit()}
                 disabled={!input.trim()}
               >
@@ -168,160 +136,5 @@ export default function ChatScreen() {
         </View>
       </KeyboardAvoidingView>
     </View>
-  );
+  )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#FCFDFD",
-  },
-  header: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: 20,
-    paddingTop: 50,
-    paddingBottom: 16,
-    backgroundColor: "#FFFFFF",
-    borderBottomWidth: 1,
-    borderBottomColor: "#E5E7EB",
-  },
-  backButton: {
-    justifyContent: "center",
-    alignItems: "center",
-    width: 40,
-    height: 40,
-  },
-  headerTitle: {
-    flex: 1,
-    fontSize: 20,
-    fontWeight: "bold",
-    color: "#264653",
-    textAlign: "center",
-  },
-  headerRight: {
-    width: 40,
-  },
-  chatContainer: {
-    flex: 1,
-  },
-  messagesContainer: {
-    flex: 1,
-  },
-  messagesContent: {
-    padding: 20,
-    paddingBottom: 10,
-  },
-  messageContainer: {
-    marginBottom: 16,
-    flexDirection: "row",
-  },
-  userMessageContainer: {
-    justifyContent: "flex-end",
-  },
-  aiMessageContainer: {
-    justifyContent: "flex-start",
-  },
-  aiAvatar: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-    backgroundColor: "#F0F9F7",
-    justifyContent: "center",
-    alignItems: "center",
-    marginRight: 8,
-    marginTop: 4,
-  },
-  messageBubble: {
-    maxWidth: "80%",
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    borderRadius: 20,
-  },
-  userMessage: {
-    backgroundColor: "#2A9D8F",
-    borderBottomRightRadius: 4,
-  },
-  aiMessage: {
-    backgroundColor: "#FFFFFF",
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-    borderBottomLeftRadius: 4,
-  },
-  messageText: {
-    fontSize: 16,
-    lineHeight: 22,
-  },
-  userMessageText: {
-    color: "#FFFFFF",
-  },
-  aiMessageText: {
-    color: "#264653",
-  },
-  inputContainer: {
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    backgroundColor: "#FFFFFF",
-    borderTopWidth: 1,
-    borderTopColor: "#E5E7EB",
-  },
-  inputWrapper: {
-    flexDirection: "row",
-    alignItems: "flex-end",
-    backgroundColor: "#F9FAFB",
-    borderRadius: 24,
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-  },
-  textInput: {
-    flex: 1,
-    fontSize: 16,
-    color: "#264653",
-    maxHeight: 100,
-    paddingTop: 6,
-    paddingBottom: 6,
-    paddingRight: 8,
-  },
-  inputActions: {
-    flexDirection: "row",
-    alignItems: "center",
-    height: 40,
-  },
-  actionButton: {
-    padding: 8,
-  },
-  sendButton: {
-    width: 36,
-    height: 36,
-    borderRadius: 18,
-    justifyContent: "center",
-    alignItems: "center",
-    marginLeft: 4,
-  },
-  sendButtonActive: {
-    backgroundColor: "#2A9D8F",
-  },
-  sendButtonDisabled: {
-    backgroundColor: "#A3A3A3",
-  },
-  errorContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 20,
-  },
-  errorText: {
-    fontSize: 18,
-    fontWeight: "bold",
-    color: "#B91C1C",
-    textAlign: "center",
-    marginBottom: 8,
-  },
-  errorSubText: {
-    fontSize: 16,
-    color: "#4B5563",
-    textAlign: "center",
-  },
-});

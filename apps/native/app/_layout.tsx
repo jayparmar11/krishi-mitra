@@ -4,6 +4,7 @@ import { Stack } from "expo-router";
 import {
   DarkTheme,
   DefaultTheme,
+  NavigationContainer,
   type Theme,
   ThemeProvider,
 } from "@react-navigation/native";
@@ -50,22 +51,22 @@ export default function RootLayout() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
-        <StatusBar style={isDarkColorScheme ? "light" : "dark"} />
-        <GestureHandlerRootView style={{ flex: 1 }}>
-          <Stack screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="splash" />
-            <Stack.Screen name="login" />
-            <Stack.Screen name="(tabs)" />
-            <Stack.Screen name="+not-found" />
-            {/* <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
+        <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
+          <StatusBar style={isDarkColorScheme ? "light" : "dark"} />
+          <GestureHandlerRootView style={{ flex: 1 }}>
+            <Stack screenOptions={{ headerShown: false }}>
+              <Stack.Screen name="splash" />
+              <Stack.Screen name="login" />
+              <Stack.Screen name="(tabs)" />
+              <Stack.Screen name="+not-found" />
+              {/* <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
             <Stack.Screen
               name="modal"
               options={{ title: "Modal", presentation: "modal" }}
             /> */}
-          </Stack>
-        </GestureHandlerRootView>
-      </ThemeProvider>
+            </Stack>
+          </GestureHandlerRootView>
+        </ThemeProvider>
     </QueryClientProvider>
   );
 }

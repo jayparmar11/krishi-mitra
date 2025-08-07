@@ -48,7 +48,7 @@ export default function RegisterScreen() {
       className="flex-1 bg-green-50" 
       behavior={'padding'}
     >
-      <View className="flex-1 justify-end px-6 pb-10">
+      <View className="flex-1 justify-end px-6 pb-20">
         <View className="items-center pb-10 mb-10">
           <View className="w-16 h-16 rounded-full bg-green-100 justify-center items-center mb-5">
             <Leaf size={32} color="#2A9D8F" strokeWidth={2} />

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { ArrowLeft, ChevronDown, TrendingUp, TrendingDown, Calendar } from 'lucide-react-native';
 import { router } from 'expo-router';
 
@@ -22,103 +22,94 @@ export default function MarketScreen() {
   ];
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
+    <View className="flex-1 bg-[#FCFDFD]">
+      <View className="flex-row items-center px-5 pt-[50px] pb-4 bg-white border-b border-b-[#E5E7EB]">
+        <TouchableOpacity onPress={() => router.back()} className="w-10 h-10 justify-center items-center">
           <ArrowLeft size={24} color="#264653" strokeWidth={2} />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>Mandi Prices</Text>
-        <View style={styles.headerRight} />
+        <Text className="flex-1 text-xl font-bold text-[#264653] text-center">Mandi Prices</Text>
+        <View className="w-10" />
       </View>
 
-      <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
-        <View style={styles.filtersContainer}>
-          <View style={styles.filterRow}>
-            <View style={styles.filterItem}>
-              <Text style={styles.filterLabel}>Crop</Text>
-              <TouchableOpacity style={styles.dropdown}>
-                <Text style={styles.dropdownText}>{selectedCrop}</Text>
+      <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
+        <View className="p-5 bg-white border-b border-b-[#E5E7EB]">
+          <View className="flex-row justify-between">
+            <View className="flex-1 mx-1">
+              <Text className="text-base font-semibold text-[#264653] mb-2">Crop</Text>
+              <TouchableOpacity className="flex-row items-center justify-between px-3 py-3 bg-[#F9FAFB] rounded-lg border border-[#E5E7EB]">
+                <Text className="text-lg text-[#264653]">{selectedCrop}</Text>
                 <ChevronDown size={16} color="#6B7280" strokeWidth={2} />
               </TouchableOpacity>
             </View>
-            
-            <View style={styles.filterItem}>
-              <Text style={styles.filterLabel}>Market</Text>
-              <TouchableOpacity style={styles.dropdown}>
-                <Text style={styles.dropdownText}>{selectedMarket}</Text>
+            <View className="flex-1 mx-1">
+              <Text className="text-base font-semibold text-[#264653] mb-2">Market</Text>
+              <TouchableOpacity className="flex-row items-center justify-between px-3 py-3 bg-[#F9FAFB] rounded-lg border border-[#E5E7EB]">
+                <Text className="text-lg text-[#264653]">{selectedMarket}</Text>
                 <ChevronDown size={16} color="#6B7280" strokeWidth={2} />
               </TouchableOpacity>
             </View>
           </View>
         </View>
 
-        <View style={styles.priceCard}>
-          <Text style={styles.cropName}>Wheat (Sona)</Text>
-          <View style={styles.priceContainer}>
-            <Text style={styles.priceAmount}>₹ 2,275</Text>
-            <Text style={styles.priceUnit}>/ Quintal</Text>
+        <View className="bg-white mx-5 mt-5 rounded-2xl p-6 shadow border border-[#E5E7EB]">
+          <Text className="text-lg font-bold text-[#264653] mb-3">Wheat (Sona)</Text>
+          <View className="flex-row items-baseline mb-3">
+            <Text className="text-4xl font-bold text-[#2A9D8F]">₹ 2,275</Text>
+            <Text className="text-lg text-[#6B7280] ml-2">/ Quintal</Text>
           </View>
-          
-          <View style={styles.priceChangeContainer}>
+          <View className="flex-row items-center mb-4">
             <TrendingUp size={16} color="#10B981" strokeWidth={2} />
-            <Text style={styles.priceChange}>+₹25</Text>
-            <Text style={styles.priceChangeText}>from yesterday</Text>
+            <Text className="text-lg font-semibold text-[#10B981] ml-1">+₹25</Text>
+            <Text className="text-base text-[#6B7280] ml-2">from yesterday</Text>
           </View>
-          
-          <View style={styles.priceMetadata}>
-            <View style={styles.metadataRow}>
+          <View className="border-t border-t-[#E5E7EB] pt-4">
+            <View className="flex-row items-center mb-2">
               <Calendar size={14} color="#6B7280" strokeWidth={2} />
-              <Text style={styles.metadataText}>Last updated: 4 Aug 2025, 11:00 AM</Text>
+              <Text className="text-base text-[#6B7280] ml-1">Last updated: 4 Aug 2025, 11:00 AM</Text>
             </View>
-            <Text style={styles.sourceText}>Source: Punjab Mandi Board</Text>
+            <Text className="text-xs text-[#9CA3AF] italic">Source: Punjab Mandi Board</Text>
           </View>
         </View>
 
-        <View style={styles.historicalSection}>
-          <View style={styles.historicalHeader}>
+        <View className="mx-5 mt-6">
+          <View className="flex-row bg-[#F9FAFB] rounded-lg p-1 mb-4">
             <TouchableOpacity
-              style={[styles.toggleButton, !showHistorical && styles.toggleButtonActive]}
+              className={`flex-1 py-2 items-center rounded ${!showHistorical ? 'bg-white shadow' : ''}`}
               onPress={() => setShowHistorical(false)}
             >
-              <Text style={[styles.toggleText, !showHistorical && styles.toggleTextActive]}>
+              <Text className={`text-base font-semibold ${!showHistorical ? 'text-[#264653]' : 'text-[#6B7280]'}`}>
                 Current
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={[styles.toggleButton, showHistorical && styles.toggleButtonActive]}
+              className={`flex-1 py-2 items-center rounded ${showHistorical ? 'bg-white shadow' : ''}`}
               onPress={() => setShowHistorical(true)}
             >
-              <Text style={[styles.toggleText, showHistorical && styles.toggleTextActive]}>
+              <Text className={`text-base font-semibold ${showHistorical ? 'text-[#264653]' : 'text-[#6B7280]'}`}>
                 Last 7 Days
               </Text>
             </TouchableOpacity>
           </View>
 
           {showHistorical && (
-            <View style={styles.historicalData}>
-              <Text style={styles.historicalTitle}>Price Trend - {selectedCrop}</Text>
+            <View className="bg-white rounded-xl p-4 border border-[#E5E7EB]">
+              <Text className="text-base font-bold text-[#264653] mb-4">Price Trend - {selectedCrop}</Text>
               {historicalData.map((item, index) => {
                 const prevPrice = index < historicalData.length - 1 ? historicalData[index + 1].price : item.price;
                 const change = item.price - prevPrice;
                 const isPositive = change > 0;
-                
                 return (
-                  <View key={index} style={styles.historicalItem}>
-                    <Text style={styles.historicalDate}>{item.date}</Text>
-                    <Text style={styles.historicalPrice}>₹ {item.price}</Text>
+                  <View key={index} className="flex-row items-center py-3 border-b border-b-[#F3F4F6]">
+                    <Text className="text-base text-[#6B7280] w-[60px]">{item.date}</Text>
+                    <Text className="text-lg font-semibold text-[#264653] flex-1 ml-4">₹ {item.price}</Text>
                     {change !== 0 && (
-                      <View style={styles.historicalChange}>
+                      <View className="flex-row items-center">
                         {isPositive ? (
                           <TrendingUp size={12} color="#10B981" strokeWidth={2} />
                         ) : (
                           <TrendingDown size={12} color="#EF4444" strokeWidth={2} />
                         )}
-                        <Text style={[
-                          styles.historicalChangeText,
-                          { color: isPositive ? '#10B981' : '#EF4444' }
-                        ]}>
-                          {isPositive ? '+' : ''}₹{Math.abs(change)}
-                        </Text>
+                        <Text className={`text-xs font-semibold ml-1 ${isPositive ? 'text-[#10B981]' : 'text-[#EF4444]'}`}>{isPositive ? '+' : ''}₹{Math.abs(change)}</Text>
                       </View>
                     )}
                   </View>
@@ -128,9 +119,9 @@ export default function MarketScreen() {
           )}
         </View>
 
-        <View style={styles.insightsCard}>
-          <Text style={styles.insightsTitle}>Market Insights</Text>
-          <Text style={styles.insightsText}>
+        <View className="bg-[#F0F9F7] mx-5 mt-6 mb-10 rounded-xl p-5 border border-[#D1FAE5]">
+          <Text className="text-base font-bold text-[#264653] mb-2">Market Insights</Text>
+          <Text className="text-base text-[#6B7280] leading-5">
             Wheat prices in Khanna mandi have shown a positive trend this week. 
             The recent rainfall in the region may affect supply, potentially driving prices higher. 
             Consider selling within the next 2-3 days if you have ready stock.
@@ -141,245 +132,3 @@ export default function MarketScreen() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#FCFDFD',
-  },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingTop: 50,
-    paddingBottom: 16,
-    backgroundColor: '#FFFFFF',
-    borderBottomWidth: 1,
-    borderBottomColor: '#E5E7EB',
-  },
-  backButton: {
-    width: 40,
-    height: 40,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  headerTitle: {
-    flex: 1,
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#264653',
-    textAlign: 'center',
-  },
-  headerRight: {
-    width: 40,
-  },
-  content: {
-    flex: 1,
-  },
-  filtersContainer: {
-    padding: 20,
-    backgroundColor: '#FFFFFF',
-    borderBottomWidth: 1,
-    borderBottomColor: '#E5E7EB',
-  },
-  filterRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  filterItem: {
-    flex: 1,
-    marginHorizontal: 4,
-  },
-  filterLabel: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#264653',
-    marginBottom: 8,
-  },
-  dropdown: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 12,
-    paddingVertical: 12,
-    backgroundColor: '#F9FAFB',
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: '#E5E7EB',
-  },
-  dropdownText: {
-    fontSize: 16,
-    color: '#264653',
-  },
-  priceCard: {
-    backgroundColor: '#FFFFFF',
-    marginHorizontal: 20,
-    marginTop: 20,
-    borderRadius: 16,
-    padding: 24,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 4,
-    borderWidth: 1,
-    borderColor: '#E5E7EB',
-  },
-  cropName: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#264653',
-    marginBottom: 12,
-  },
-  priceContainer: {
-    flexDirection: 'row',
-    alignItems: 'baseline',
-    marginBottom: 12,
-  },
-  priceAmount: {
-    fontSize: 36,
-    fontWeight: 'bold',
-    color: '#2A9D8F',
-  },
-  priceUnit: {
-    fontSize: 16,
-    color: '#6B7280',
-    marginLeft: 8,
-  },
-  priceChangeContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 16,
-  },
-  priceChange: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#10B981',
-    marginLeft: 4,
-  },
-  priceChangeText: {
-    fontSize: 14,
-    color: '#6B7280',
-    marginLeft: 8,
-  },
-  priceMetadata: {
-    borderTopWidth: 1,
-    borderTopColor: '#E5E7EB',
-    paddingTop: 16,
-  },
-  metadataRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 8,
-  },
-  metadataText: {
-    fontSize: 14,
-    color: '#6B7280',
-    marginLeft: 4,
-  },
-  sourceText: {
-    fontSize: 12,
-    color: '#9CA3AF',
-    fontStyle: 'italic',
-  },
-  historicalSection: {
-    marginHorizontal: 20,
-    marginTop: 24,
-  },
-  historicalHeader: {
-    flexDirection: 'row',
-    backgroundColor: '#F9FAFB',
-    borderRadius: 8,
-    padding: 4,
-    marginBottom: 16,
-  },
-  toggleButton: {
-    flex: 1,
-    paddingVertical: 8,
-    alignItems: 'center',
-    borderRadius: 6,
-  },
-  toggleButtonActive: {
-    backgroundColor: '#FFFFFF',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    elevation: 2,
-  },
-  toggleText: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#6B7280',
-  },
-  toggleTextActive: {
-    color: '#264653',
-  },
-  historicalData: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 12,
-    padding: 16,
-    borderWidth: 1,
-    borderColor: '#E5E7EB',
-  },
-  historicalTitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#264653',
-    marginBottom: 16,
-  },
-  historicalItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: '#F3F4F6',
-  },
-  historicalDate: {
-    fontSize: 14,
-    color: '#6B7280',
-    width: 60,
-  },
-  historicalPrice: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#264653',
-    flex: 1,
-    marginLeft: 16,
-  },
-  historicalChange: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  historicalChangeText: {
-    fontSize: 12,
-    fontWeight: '600',
-    marginLeft: 2,
-  },
-  insightsCard: {
-    backgroundColor: '#F0F9F7',
-    marginHorizontal: 20,
-    marginTop: 24,
-    marginBottom: 40,
-    borderRadius: 12,
-    padding: 20,
-    borderWidth: 1,
-    borderColor: '#D1FAE5',
-  },
-  insightsTitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#264653',
-    marginBottom: 8,
-  },
-  insightsText: {
-    fontSize: 14,
-    color: '#6B7280',
-    lineHeight: 20,
-  },
-});
