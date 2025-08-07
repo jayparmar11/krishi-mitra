@@ -23,14 +23,6 @@ export default function MarketScreen() {
 
   return (
     <View className="flex-1 bg-[#FCFDFD]">
-      <View className="flex-row items-center px-5 pt-[50px] pb-4 bg-white border-b border-b-[#E5E7EB]">
-        <TouchableOpacity onPress={() => router.back()} className="w-10 h-10 justify-center items-center">
-          <ArrowLeft size={24} color="#264653" strokeWidth={2} />
-        </TouchableOpacity>
-        <Text className="flex-1 text-xl font-bold text-[#264653] text-center">Mandi Prices</Text>
-        <View className="w-10" />
-      </View>
-
       <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
         <View className="p-5 bg-white border-b border-b-[#E5E7EB]">
           <View className="flex-row justify-between">

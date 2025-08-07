@@ -1,17 +1,16 @@
-import { useState, useRef, useEffect } from "react";
+import { Container } from "@/components/container";
+import { useChat } from "@ai-sdk/react";
+import { fetch as expoFetch } from "expo/fetch";
+import { Bot, Mic, Send } from "lucide-react-native";
+import { useEffect, useRef } from "react";
 import {
-  View,
+  FlatList,
+  KeyboardAvoidingView,
   Text,
   TextInput,
   TouchableOpacity,
-  ScrollView,
-  KeyboardAvoidingView,
-  Platform,
+  View
 } from "react-native";
-import { ArrowLeft, Send, Mic, Camera, Bot } from "lucide-react-native";
-import { router } from "expo-router";
-import { useChat } from "@ai-sdk/react";
-import { fetch as expoFetch } from "expo/fetch";
 
 // Utility function to generate API URLs from ai.tsx
 const generateAPIUrl = (relativePath: string) => {
@@ -33,57 +32,44 @@ export default function ChatScreen() {
     api: generateAPIUrl("/ai"),
     onError: (error) => console.error(error, "AI Chat Error"),
     // Initial message from the original chat.tsx
-    initialMessages: [
-      {
-        id: "1",
-        role: "assistant",
-        content:
-          "Hi! How can I help you today? You can ask me about weather, soil, pests, or market prices.",
-      },
-    ],
+    initialMessages: [],
   });
 
-  const scrollViewRef = useRef<ScrollView>(null);
+  const flatListRef = useRef<FlatList>(null);
 
   useEffect(() => {
-    scrollViewRef.current?.scrollToEnd({ animated: true });
+    if (messages.length > 0) {
+      flatListRef.current?.scrollToEnd?.({ animated: true });
+      flatListRef.current?.scrollToIndex?.({ index: messages.length - 1 });
+    }
   }, [messages]);
 
   if (error) {
     return (
       <View className="flex-1 bg-[#FCFDFD]">
         <View className="flex-1 justify-center items-center p-5">
-          <Text className="text-lg font-bold text-red-700 text-center mb-2">Error: {error.message}</Text>
-          <Text className="text-base text-gray-600 text-center">Please check your connection and try again.</Text>
+          <Text className="text-lg font-bold text-red-700 text-center mb-2">
+            Error: {error.message}
+          </Text>
+          <Text className="text-base text-gray-600 text-center">
+            Please check your connection and try again.
+          </Text>
         </View>
       </View>
     );
   }
   return (
-    <View className="flex-1 bg-[#FCFDFD]">
-      <View className="flex-row items-center px-5 pt-12 pb-4 bg-white border-b border-gray-200">
-        <TouchableOpacity onPress={() => router.back()} className="justify-center items-center w-10 h-10">
-          <ArrowLeft size={24} color="#264653" strokeWidth={2} />
-        </TouchableOpacity>
-        <Text className="flex-1 text-xl font-bold text-primary text-center">AI Assistant</Text>
-        <View className="w-10" />
-      </View>
-
-      <KeyboardAvoidingView
-        className="flex-1"
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        keyboardVerticalOffset={Platform.OS === "ios" ? 100 : 0}
-      >
-        <ScrollView
-          ref={scrollViewRef}
-          className="flex-1"
-          contentContainerStyle={{ padding: 20, paddingBottom: 10 }}
-          showsVerticalScrollIndicator={false}
-        >
-          {messages.map((message) => (
+    <>
+      <KeyboardAvoidingView behavior="padding" className="flex-1">
+        <FlatList
+          ref={flatListRef}
+          data={messages}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item: message }) => (
             <View
-              key={message.id}
-              className={`mb-4 flex-row ${message.role === "user" ? "justify-end" : "justify-start"}`}
+              className={`mb-4 flex-row ${
+                message.role === "user" ? "justify-end" : "justify-start"
+              }`}
             >
               {message.role !== "user" && (
                 <View className="w-8 h-8 rounded-full bg-teal-50 justify-center items-center mr-2 mt-1">
@@ -91,14 +77,43 @@ export default function ChatScreen() {
                 </View>
               )}
               <View
-                className={`max-w-[80%] px-4 py-3 rounded-2xl ${message.role === "user" ? "bg-primary rounded-br-md" : "bg-white border border-gray-200 rounded-bl-md"}`}
+                className={`max-w-[80%] px-4 py-3 rounded-2xl ${
+                  message.role === "user"
+                    ? "bg-primary rounded-br-md"
+                    : "bg-white border border-gray-200 rounded-bl-md"
+                }`}
               >
-                <Text className={`text-base leading-6 ${message.role === "user" ? "text-white" : "text-primary"}`}>{message.content}</Text>
+                <Text
+                  className={`text-base leading-6 ${
+                    message.role === "user" ? "text-white" : "text-primary"
+                  }`}
+                >
+                  {message.content}
+                </Text>
               </View>
             </View>
-          ))}
-        </ScrollView>
-
+          )}
+          ListEmptyComponent={
+            <View className="flex-1 justify-center items-center py-20">
+              <Text className="text-lg font-semibold text-primary mb-2">
+                Welcome to Krishi Mitra!
+              </Text>
+              <Text className="text-base text-gray-600 text-center mb-4">
+                Ask me anything about agriculture, seeds, weather, or market.
+                For example:
+              </Text>
+              <Text className="text-base text-gray-500 italic text-center">
+                "How do I choose the best seeds for my farm?"
+              </Text>
+            </View>
+          }
+          contentContainerStyle={{
+            padding: 20,
+            paddingBottom: 10,
+            flexGrow: 1,
+          }}
+          showsVerticalScrollIndicator={false}
+        />
         <View className="px-5 py-2 bg-white border-t border-gray-200">
           <View className="flex-row items-end bg-gray-50 rounded-full px-3 py-2 border border-gray-200">
             <TextInput
@@ -121,11 +136,13 @@ export default function ChatScreen() {
               <TouchableOpacity className="p-2">
                 <Mic size={20} color="#6B7280" strokeWidth={2} />
               </TouchableOpacity>
-              <TouchableOpacity className="p-2">
+              {/* <TouchableOpacity className="p-2">
                 <Camera size={20} color="#6B7280" strokeWidth={2} />
-              </TouchableOpacity>
+              </TouchableOpacity> */}
               <TouchableOpacity
-                className={`w-9 h-9 rounded-full justify-center items-center ml-1 ${input.trim() ? "bg-primary" : "bg-gray-400"}`}
+                className={`w-9 h-9 rounded-full justify-center items-center ml-1 ${
+                  input.trim() ? "bg-brand-main" : "bg-gray-400"
+                }`}
                 onPress={() => handleSubmit()}
                 disabled={!input.trim()}
               >
@@ -135,6 +152,6 @@ export default function ChatScreen() {
           </View>
         </View>
       </KeyboardAvoidingView>
-    </View>
-  )
+    </>
+  );
 }
