@@ -14,7 +14,7 @@ const app = new Hono();
 
 app.use(logger());
 app.use("/*", cors({
-  origin: process.env.CORS_ORIGIN || "",
+  origin: "*",
   allowMethods: ["GET", "POST", "OPTIONS"],
   allowHeaders: ["Content-Type", "Authorization"],
   credentials: true,
@@ -41,7 +41,8 @@ app.post("/ai", async (c) => {
   const body = await c.req.json();
   const messages = body.messages || [];
   const result = streamText({
-    model: google("gemini-1.5-flash"),
+    model: google("gemini-2.0-flash-lite"),
+    system: "you are a agricultural assistant",
     messages,
   });
 

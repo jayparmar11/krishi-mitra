@@ -1,3 +1,6 @@
+import { tailwindCSSColors } from "./utils/tailwindTheme";
+
+
 const { hairlineWidth } = require("nativewind/theme");
 
 /** @type {import('tailwindcss').Config} */
@@ -9,6 +12,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        brand: {
+          main: "#2A9D8F",
+        },
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {

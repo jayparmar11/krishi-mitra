@@ -46,6 +46,20 @@ const DrawerLayout = () => {
           ),
         }}
       />
+      <Drawer.Screen
+        name="chat"
+        options={{
+          headerTitle: "CHAT",
+          drawerLabel: "CHAT",
+          drawerIcon: ({ size, color }) => (
+            <Ionicons
+              name="chatbubble-ellipses-outline"
+              size={size}
+              color={color}
+            />
+          ),
+        }}
+      />
     </Drawer>
   );
 };

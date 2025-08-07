@@ -26,11 +26,6 @@ const DARK_THEME: Theme = {
   colors: NAV_THEME.dark,
 };
 
-export const unstable_settings = {
-  initialRouteName: "(drawer)",
-};
-
-
 export default function RootLayout() {
   const hasMounted = useRef(false);
   const { colorScheme, isDarkColorScheme } = useColorScheme();
@@ -57,12 +52,16 @@ export default function RootLayout() {
       <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
         <StatusBar style={isDarkColorScheme ? "light" : "dark"} />
         <GestureHandlerRootView style={{ flex: 1 }}>
-          <Stack>
-            <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
+          <Stack screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="splash" />
+            <Stack.Screen name="login" />
+            <Stack.Screen name="(tabs)" />
+            <Stack.Screen name="+not-found" />
+            {/* <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
             <Stack.Screen
               name="modal"
               options={{ title: "Modal", presentation: "modal" }}
-            />
+            /> */}
           </Stack>
         </GestureHandlerRootView>
       </ThemeProvider>
