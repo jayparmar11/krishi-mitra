@@ -1,3 +1,4 @@
+import {AutoScrollFlatList} from "react-native-autoscroll-flatlist";
 import { Container } from "@/components/container";
 import { useChat } from "@ai-sdk/react";
 import { fetch as expoFetch } from "expo/fetch";
@@ -35,16 +36,11 @@ export default function ChatScreen() {
     initialMessages: [],
   });
 
-  const flatListRef = useRef<FlatList>(null);
+  // const flatListRef = useRef<FlatList>(null);
 
-  useEffect(() => {
-    if (messages.length > 0) {
-      flatListRef.current?.scrollToEnd?.({ animated: true });
-      flatListRef.current?.scrollToIndex?.({ index: messages.length - 1 });
-    }
-  }, [messages]);
 
   if (error) {
+  console.log("🚀 ~ ChatScreen ~ error:", error)
     return (
       <View className="flex-1 bg-[#FCFDFD]">
         <View className="flex-1 justify-center items-center p-5">
@@ -60,36 +56,24 @@ export default function ChatScreen() {
   }
   return (
     <>
-      <KeyboardAvoidingView behavior="padding" className="flex-1">
-        <FlatList
-          ref={flatListRef}
-          data={messages}
+      <KeyboardAvoidingView behavior="padding" className="flex-1" keyboardVerticalOffset={100}>
+        <AutoScrollFlatList
+          data={messages.toReversed()}
           keyExtractor={(item) => item.id}
           renderItem={({ item: message }) => (
             <View
-              className={`mb-4 flex-row ${
-                message.role === "user" ? "justify-end" : "justify-start"
-              }`}
+              key={message.id}
+              className={`mb-4 flex-row ${message.role === "user" ? "justify-end" : "justify-start"}`}
             >
               {message.role !== "user" && (
-                <View className="w-8 h-8 rounded-full bg-teal-50 justify-center items-center mr-2 mt-1">
+                <View className="w-8 h-8 absolute -top-3 z-10 -left-3 rounded-full bg-teal-100 justify-center items-center mr-2 mt-1">
                   <Bot size={16} color="#2A9D8F" strokeWidth={2} />
                 </View>
               )}
               <View
-                className={`max-w-[80%] px-4 py-3 rounded-2xl ${
-                  message.role === "user"
-                    ? "bg-primary rounded-br-md"
-                    : "bg-white border border-gray-200 rounded-bl-md"
-                }`}
+                className={`max-w-[90%] px-4 py-3 rounded-2xl ${message.role === "user" ? "bg-primary rounded-br-md" : "bg-white border border-gray-200 rounded-bl-md"}`}
               >
-                <Text
-                  className={`text-base leading-6 ${
-                    message.role === "user" ? "text-white" : "text-primary"
-                  }`}
-                >
-                  {message.content}
-                </Text>
+                <Text className={`text-base leading-6 ${message.role === "user" ? "text-white" : "text-primary"}`}>{message.content}</Text>
               </View>
             </View>
           )}
@@ -111,13 +95,14 @@ export default function ChatScreen() {
             padding: 20,
             paddingBottom: 10,
             flexGrow: 1,
+            flexDirection:"column-reverse"
           }}
           showsVerticalScrollIndicator={false}
         />
-        <View className="px-5 py-2 bg-white border-t border-gray-200">
-          <View className="flex-row items-end bg-gray-50 rounded-full px-3 py-2 border border-gray-200">
+        <View className="bg-slate-100 dark:bg-slate-900 border-t border-l border-r border-gray-200 rounded-t-xl">
+          <View className="flex-row items-end rounded-full py-4 px-4">
             <TextInput
-              className="flex-1 text-base text-primary max-h-24 pt-1 pb-1 pr-2"
+              className="flex-1 text-base text-primary  max-h-24 pt-1 pb-1 pr-2"
               value={input}
               onChange={(e) =>
                 handleInputChange({

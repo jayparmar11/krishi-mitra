@@ -41,7 +41,7 @@ app.post("/ai", async (c) => {
   const body = await c.req.json();
   const messages = body.messages || [];
   const result = streamText({
-    model: google("gemini-2.0-flash-lite"),
+    model: google("gemini-2.0-flash"),
     system: "you are a agricultural assistant",
     messages,
   });
