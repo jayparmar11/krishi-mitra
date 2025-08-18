@@ -71,3 +71,7 @@ krishi-mitra/
 - `pnpm dev:native`: Start the React Native/Expo development server
 - `pnpm db:push`: Push schema changes to database
 - `pnpm db:studio`: Open database studio UI
+
+# Demo Video Link
+
+[![Watch the video](https://google.com)]
