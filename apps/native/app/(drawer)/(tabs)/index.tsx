@@ -14,7 +14,6 @@ const FeatureCard = ({
   subtitle,
   icon,
   onPress,
-  backgroundColor = "#FFFFFF",
 }: {
   title: string;
   subtitle: string;
@@ -23,10 +22,7 @@ const FeatureCard = ({
   backgroundColor?: string;
 }) => (
   <TouchableOpacity
-    className={`w-[48%] bg-white rounded-2xl p-5 mb-4 items-center shadow-sm border border-gray-200 ${
-      backgroundColor !== "#FFFFFF" ? "" : ""
-    }`}
-    style={backgroundColor !== "#FFFFFF" ? { backgroundColor } : undefined}
+    className={`w-[48%] rounded-2xl p-5 mb-4 items-center shadow-sm border border-gray-200 dark:border-gray-700 bg-background dark:bg-gray-800`}
     onPress={onPress}
   >
     <View className="w-14 h-14 rounded-full bg-teal-50 justify-center items-center mb-3">
@@ -43,13 +39,13 @@ const FeatureCard = ({
 
 export default function HomeScreen() {
   return (
-    <View className="flex-1 bg-[#FCFDFD]">
+    <View className="flex-1 bg-blue-50 dark:bg-black">
       <ScrollView className="flex-1 px-5" showsVerticalScrollIndicator={false}>
         <View className="pt-7 pb-2">
           <Text className="text-2xl font-bold text-primary text-center mb-1">
             Welcome to Krishi Mitra
           </Text>
-          <Text className="text-base text-gray-600 text-center">
+          <Text className="text-base text-gray-500 text-center">
             Your AI-powered agriculture advisor
           </Text>
         </View>

@@ -25,8 +25,8 @@ export default function TabLayout() {
       <Drawer
         screenOptions={{}}
         drawerContent={() => (
-          <Container className="flex-1 pb-safe justify-end p-4 bg-white">
-            <TouchableOpacity className="flex-row items-center gap-4 mb-4 bg-slate-100 py-4 px-2 rounded-xl">
+          <Container className="flex-1 pb-safe justify-end p-4 bg-background">
+            <TouchableOpacity className="flex-row items-center gap-4 mb-4 bg-slate-100 dark:bg-gray-800 py-4 px-2 rounded-xl">
               {session?.user?.image ? (
                 <Image
                   source={{
@@ -46,10 +46,10 @@ export default function TabLayout() {
                 </>
               )}
               <View className="flex-1">
-                <Text className="font-semibold text-lg text-gray-900">
+                <Text className="font-semibold text-lg text-gray-900 dark:text-white">
                   {session?.user?.name || 'User'}
                 </Text>
-                <Text className="text-gray-500 text-sm">
+                <Text className="text-slate-500 text-sm">
                   {session?.user?.email || 'user@email.com'}
                 </Text>
               </View>
@@ -59,7 +59,7 @@ export default function TabLayout() {
                   queryClient.invalidateQueries();
                   router.replace('/(auth)/login');
                 }}
-                className="p-2"
+                className="p-2 bg-red-500/20 rounded-full"
               >
                 <LogOut size={24} color="#EF4444" />
               </TouchableOpacity>
@@ -78,7 +78,7 @@ export default function TabLayout() {
                 </TouchableOpacity>
                 <TouchableOpacity className="flex-row items-center px-3 me-4 py-2 bg-teal-100 rounded-full">
                   <Globe size={20} color="#264653" />
-                  <Text className="text-sm font-semibold text-primary ml-1">En</Text>
+                  <Text className="text-sm font-semibold ml-1 text-black">En</Text>
                 </TouchableOpacity>
               </View>
             )

@@ -9,12 +9,13 @@ import { logger } from "hono/logger";
 import { streamText } from "ai";
 import { google } from "@ai-sdk/google";
 import { stream } from "hono/streaming";
+import rag from "./routers/rag";
 
 const app = new Hono();
 
 app.use(logger());
 app.use("/*", cors({
-  origin: ["*", process.env.CORS_ORIGIN!],
+  origin: ["*"],
   allowMethods: ["GET", "POST", "OPTIONS"],
   allowHeaders: ["Content-Type", "Authorization"],
   credentials: true,
@@ -41,7 +42,7 @@ app.post("/ai", async (c) => {
   const body = await c.req.json();
   const messages = body.messages || [];
   const result = streamText({
-    model: google("gemini-2.0-flash"),
+    model: google("gemini-2.0-flash-lite"),
     system: "you are a agricultural assistant",
     messages,
   });
@@ -50,6 +51,8 @@ app.post("/ai", async (c) => {
   c.header("Content-Type", "text/plain; charset=utf-8");
   return stream(c, (stream) => stream.pipe(result.toDataStream()));
 });
+
+app.route('/', rag)
 
 
 app.get("/", (c) => {

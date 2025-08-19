@@ -1,9 +1,9 @@
 {
   "expo": {
-    "name": "my-better-t-app",
-    "slug": "my-better-t-app",
+    "name": "Krishi Mitra",
+    "slug": "krishi-mitra",
     "version": "1.0.0",
-    "scheme": "my-better-t-app",
+    "scheme": "krishi-mitra",
     "web": {
       "bundler": "metro",
       "output": "static",

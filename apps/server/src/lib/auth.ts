@@ -9,7 +9,7 @@ export const auth = betterAuth({
   database: mongodbAdapter(client),
   trustedOrigins: [
     process.env.CORS_ORIGIN || "",
-    "my-better-t-app://",
+    "krishi-mitra://",
   ],
   emailAndPassword: {
     enabled: true,

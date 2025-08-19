@@ -1,17 +1,14 @@
-import {AutoScrollFlatList} from "react-native-autoscroll-flatlist";
-import { Container } from "@/components/container";
 import { useChat } from "@ai-sdk/react";
 import { fetch as expoFetch } from "expo/fetch";
 import { Bot, Mic, Send } from "lucide-react-native";
-import { useEffect, useRef } from "react";
 import {
-  FlatList,
   KeyboardAvoidingView,
   Text,
   TextInput,
   TouchableOpacity,
   View
 } from "react-native";
+import { AutoScrollFlatList } from "react-native-autoscroll-flatlist";
 
 // Utility function to generate API URLs from ai.tsx
 const generateAPIUrl = (relativePath: string) => {
