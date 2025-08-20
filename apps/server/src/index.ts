@@ -52,7 +52,7 @@ app.post("/ai", async (c) => {
   return stream(c, (stream) => stream.pipe(result.toDataStream()));
 });
 
-app.route('/', rag)
+// app.route('/', rag)
 
 
 app.get("/", (c) => {

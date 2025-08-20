@@ -1,5 +1,6 @@
 import { User } from "@/db/models/auth.model";
 import { protectedProcedure, publicProcedure } from "../lib/orpc";
+import { chatRouter } from "./chat.router";
 import axios from "axios";
 import z from "zod";
 import mongoose from "mongoose";
@@ -8,12 +9,10 @@ export const appRouter = {
   healthCheck: publicProcedure.handler(() => {
     return "OK";
   }),
-  privateData: protectedProcedure.handler(({ context }) => {
-    return {
-      message: "This is private",
-      user: context.session?.user,
-    };
-  }),
+  
+  // Chat endpoints
+  chat: chatRouter,
+
   weather: protectedProcedure.handler(async ({ context }) => {
     const apiKey = process.env.OPENWEATHERMAP_API_KEY;
     const city = context.session?.user?.city;

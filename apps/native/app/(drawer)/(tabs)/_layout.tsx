@@ -42,23 +42,36 @@ export default function TabLayout() {
           }}
         />
         <Tabs.Screen
-          name="rag"
+          name="chat/new"
           options={{
-            title: 'RAG Assistant',
-            headerTitle: 'RAG Assistant',
+            title: 'AI Chat',
+            headerTitle: 'AI Chat',
             tabBarIcon: ({ size, color }) => (
               <MessageCircle size={size} color={color} strokeWidth={2} />
             )
           }}
         />
         <Tabs.Screen
-          name="chat"
+          name="rag"
           options={{
-            href:null,
+            href: null,
             tabBarStyle: { display: 'none' },
           }}
         />
-        
+        <Tabs.Screen
+          name="chat/[sessionId]"
+          options={{
+            href: null,
+            tabBarStyle: { display: 'none' },
+          }}
+        />
+        <Tabs.Screen
+          name="chat/index"
+          options={{
+            href: null,
+            tabBarStyle: { display: 'none' },
+          }}
+        />
         <Tabs.Screen
           name="news/[id]"
           options={{

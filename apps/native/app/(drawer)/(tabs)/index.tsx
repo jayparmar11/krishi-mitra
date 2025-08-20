@@ -55,7 +55,7 @@ export default function HomeScreen() {
             title="Ask Me Anything"
             subtitle="Crop advice, finance, policies"
             icon={<MessageCircle size={32} color="#2A9D8F" strokeWidth={2} />}
-            onPress={() => router.push("/rag")}
+            onPress={() => router.push("/chat/new")}
           />
           <FeatureCard
             title="Weather"

@@ -4,17 +4,6 @@ import { mongodbAdapter } from "better-auth/adapters/mongodb";
 import { expo } from "@better-auth/expo";
 import { client } from "../db";
 
-type UserWithCity = {
-  id: string;
-  email: string;
-  city?: string;
-  [key: string]: any;
-};
-
-type SessionCallbackArgs = {
-  session: { user: Record<string, any> };
-  user: UserWithCity;
-};
 export const auth = betterAuth({
   database: mongodbAdapter(client),
   trustedOrigins: [
@@ -23,9 +12,14 @@ export const auth = betterAuth({
   ],
   user: {
     additionalFields: {
-      city: { type: "string", required: false }
+      city: { type: "string", required: false, fieldName: "city", returned: true },
     },
     modelName: 'user'
+  },
+  logger: {
+    log(level, message, ...args) {
+      console[level](message, ...args);
+    },
   },
   emailAndPassword: {
     enabled: true,
