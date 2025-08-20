@@ -58,6 +58,22 @@ export default function TabLayout() {
             tabBarStyle: { display: 'none' },
           }}
         />
+        
+        <Tabs.Screen
+          name="news/[id]"
+          options={{
+            href:null,
+            tabBarStyle: { display: 'none' },
+          }}
+        />
+        
+        <Tabs.Screen
+          name="news/data"
+          options={{
+            href:null,
+            tabBarStyle: { display: 'none' },
+          }}
+        />
         <Tabs.Screen
           name="weather"
           options={{

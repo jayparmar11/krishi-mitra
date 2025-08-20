@@ -8,6 +8,7 @@ import {
   Mic,
   Globe,
 } from "lucide-react-native";
+import newsItems, { NewsItem } from "./news/data";
 
 const FeatureCard = ({
   title,
@@ -54,7 +55,7 @@ export default function HomeScreen() {
             title="Ask Me Anything"
             subtitle="Crop advice, finance, policies"
             icon={<MessageCircle size={32} color="#2A9D8F" strokeWidth={2} />}
-            onPress={() => router.push("/chat")}
+            onPress={() => router.push("/rag")}
           />
           <FeatureCard
             title="Weather"
@@ -63,17 +64,32 @@ export default function HomeScreen() {
             onPress={() => router.push("/weather")}
           />
           <FeatureCard
-            title="Mandi Rates"
-            subtitle="Check latest crop prices"
-            icon={<TrendingUp size={32} color="#2A9D8F" strokeWidth={2} />}
-            onPress={() => router.push("/market")}
-          />
-          <FeatureCard
             title="Govt. Schemes"
             subtitle="Find subsidies and support"
             icon={<Building size={32} color="#2A9D8F" strokeWidth={2} />}
             onPress={() => {}}
           />
+        </View>
+        <View className="pt-6">
+          <Text className="text-lg font-bold text-primary mb-3">Updates & News</Text>
+          <View className="gap-4 pb-8">
+            {newsItems.map((item: NewsItem) => (
+              <TouchableOpacity
+                key={item.id}
+                className="p-4 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700"
+                onPress={() =>
+                  router.push({
+                    pathname: "(drawer)/(tabs)/news/[id]",
+                    params: { id: item.id },
+                  } as any)
+                }
+              >
+                <Text className="text-sm font-semibold text-primary">{item.title}</Text>
+                <Text className="text-xs text-gray-500 mt-1">{item.date}</Text>
+                <Text className="text-xs text-gray-600 dark:text-gray-300 mt-2">{item.excerpt}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
         </View>
       </ScrollView>
     </View>

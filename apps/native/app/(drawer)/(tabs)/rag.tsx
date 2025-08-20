@@ -165,7 +165,7 @@ export default function ChatScreen() {
 
   return (
     <>
-      <KeyboardAvoidingView behavior="padding" className="flex-1 pb-safe" keyboardVerticalOffset={100}>
+      <KeyboardAvoidingView behavior="padding" className="flex-1" keyboardVerticalOffset={100}>
         <AutoScrollFlatList
           ref={flatListRef}
           data={[...messages].reverse()}
@@ -214,7 +214,7 @@ export default function ChatScreen() {
                   <TouchableOpacity
                     key={p}
                     onPress={() => handleExamplePrompt(p)}
-                    className="bg-white border border-gray-200 rounded-xl py-3 px-4 mb-3"
+                    className="bg-gray-500/10 border border-slate-500/40 rounded-xl py-3 px-4 mb-3"
                   >
                     <Text className="text-base text-primary">{p}</Text>
                   </TouchableOpacity>
@@ -244,7 +244,7 @@ export default function ChatScreen() {
           </View>
         )}
 
-        <View className="bg-slate-100 dark:bg-slate-900 border-t border-l border-r border-gray-200 rounded-t-xl">
+        <View className="bg-slate-100 dark:bg-gray-900 border-t border-slate-500/40 pb-safe">
           <View className="flex-row items-end rounded-full py-4 px-4">
             <TextInput
               className="flex-1 text-base text-primary  max-h-24 pt-1 pb-1 pr-2"

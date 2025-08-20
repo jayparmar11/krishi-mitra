@@ -8,6 +8,7 @@ const userSchema = new Schema(
         name: { type: String, required: true },
         email: { type: String, required: true, unique: true },
         emailVerified: { type: Boolean, required: true },
+        city: { type: String },
         image: { type: String },
         createdAt: { type: Date, required: true },
         updatedAt: { type: Date, required: true },
@@ -60,9 +61,9 @@ const verificationSchema = new Schema(
     { collection: 'verification' }
 );
 
-const User = model('User', userSchema);
-const Session = model('Session', sessionSchema);
-const Account = model('Account', accountSchema);
-const Verification = model('Verification', verificationSchema);
+const User = model('user', userSchema);
+const Session = model('session', sessionSchema);
+const Account = model('account', accountSchema);
+const Verification = model('verification', verificationSchema);
 
 export { User, Session, Account, Verification };
