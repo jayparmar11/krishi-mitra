@@ -25,22 +25,28 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#000000"
     },
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.amanvarshney01.mybettertapp"
+      "bundleIdentifier": "com.jayparmar11.krishimitra"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.amanvarshney01.mybettertapp",
+      "package": "com.jayparmar11.krishimitra",
       "edgeToEdgeEnabled": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "e5afd51c-0465-40a7-ad41-fb78fa6e91fc"
+      }
     }
   }
 }
