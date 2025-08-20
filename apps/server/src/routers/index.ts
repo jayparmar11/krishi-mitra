@@ -1,4 +1,4 @@
-import { User } from "@/db/models/auth.model";
+import { User } from "../db/models/auth.model";
 import { protectedProcedure, publicProcedure } from "../lib/orpc";
 import { chatRouter } from "./chat.router";
 import axios from "axios";
