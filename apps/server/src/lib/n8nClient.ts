@@ -8,7 +8,7 @@ const n8n = axios.create({
   }
 })
 export const runRagWorkflow = async ({ query, sessionId, city }: { query: string, sessionId: string, city: string }) => {
-  const res = await n8n.post('/webhook-test/b2bf47da-7e97-4630-a0a8-22592e491a71', { query, sessionId, city })
+  const res = await n8n.post('/webhook/b2bf47da-7e97-4630-a0a8-22592e491a71', { query, sessionId, city })
   console.log("🚀 ~ runRagWorkflow ~ res.data:", res.data)
   return res.data
 }
