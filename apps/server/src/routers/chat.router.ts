@@ -1,11 +1,10 @@
-import { ChatSession, ChatMessage } from "../db/models/chat.model.js";
-import { protectedProcedure } from "../lib/orpc.js";
-import { runRagWorkflow } from "../lib/n8nClient.js";
-import z from "zod";
-import { generateText, streamText } from "ai";
 import { google } from "@ai-sdk/google";
+import { generateText } from "ai";
+import z from "zod";
 import { User } from "../db/models/auth.model.js";
-import mongoose from "mongoose";
+import { ChatMessage, ChatSession } from "../db/models/chat.model.js";
+import { runRagWorkflow } from "../lib/n8nClient.js";
+import { protectedProcedure } from "../lib/orpc.js";
 
 const generateSessionTitle = (firstMessage: string): string => {
   return firstMessage.length > 30

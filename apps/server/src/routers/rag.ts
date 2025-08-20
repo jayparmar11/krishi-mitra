@@ -1,5 +1,4 @@
 import { Hono } from 'hono'
-import { runRagWorkflow } from '../lib/n8nClient'
 
 const rag = new Hono()
 

@@ -9,7 +9,6 @@ import { logger } from "hono/logger";
 import { streamText } from "ai";
 import { google } from "@ai-sdk/google";
 import { stream } from "hono/streaming";
-import rag from "./routers/rag.js";
 
 const app = new Hono();
 
