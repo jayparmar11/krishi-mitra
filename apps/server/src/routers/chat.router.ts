@@ -235,7 +235,7 @@ export const chatRouter = {
 
           return { userMessage, aiMessage };
         } catch (error) {
-          console.error("RAG workflow error:", error?.response?.data?.message || error?.data?.message);
+          console.error("RAG workflow error:", (error as any)?.response?.data?.message || (error as any)?.data?.message);
           
           // Create error message instead of throwing
           const errorMessage = new ChatMessage({
@@ -249,7 +249,7 @@ export const chatRouter = {
             metadata: {
               model: 'error',
               isError: true,
-              errorDetails: error?.message || 'Unknown error'
+              errorDetails: (error as any)?.message || 'Unknown error'
             },
             createdAt: new Date(),
             updatedAt: new Date(),
@@ -390,7 +390,7 @@ export const chatRouter = {
         await session.save();
 
         return newMessage;
-      } catch (error) {console.error("RAG workflow error:", error?.response?.data?.message || error?.data?.message);
+      } catch (error) {console.error("RAG workflow error:", (error as any)?.response?.data?.message || (error as any)?.data?.message);
         
         // Create error message instead of throwing
         const errorMessage = new ChatMessage({
@@ -404,7 +404,7 @@ export const chatRouter = {
           metadata: {
             model: 'error',
             isError: true,
-            errorDetails: error?.message || 'Unknown error'
+            errorDetails: (error as any)?.message || 'Unknown error'
           },
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -663,7 +663,7 @@ export const chatRouter = {
           };
         }
       } catch (error) {
-        console.error("RAG workflow error:", error?.response?.data?.message || error?.data?.message);
+        console.error("RAG workflow error:", (error as any)?.response?.data?.message || (error as any)?.data?.message);
         
         // Create error message instead of throwing
         const errorMessage = new ChatMessage({
@@ -677,7 +677,7 @@ export const chatRouter = {
           metadata: {
             model: 'error',
             isError: true,
-            errorDetails: error?.message || 'Unknown error'
+            errorDetails: (error as any)?.message || 'Unknown error'
           },
           createdAt: new Date(),
           updatedAt: new Date(),
