@@ -1,6 +1,6 @@
 import type { Context as HonoContext } from "hono";
-import { auth } from "./auth";
-import { User } from "../db/models/auth.model";
+import { auth } from "./auth.js";
+import { User } from "../db/models/auth.model.js";
 
 export type CreateContextOptions = {
   context: HonoContext;

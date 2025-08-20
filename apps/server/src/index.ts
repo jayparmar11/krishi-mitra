@@ -1,15 +1,15 @@
 import "dotenv/config";
 import { RPCHandler } from "@orpc/server/fetch";
-import { createContext } from "./lib/context";
-import { appRouter } from "./routers/index";
-import { auth } from "./lib/auth";
+import { createContext } from "./lib/context.js";
+import { appRouter } from "./routers/index.js";
+import { auth } from "./lib/auth.js";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { logger } from "hono/logger";
 import { streamText } from "ai";
 import { google } from "@ai-sdk/google";
 import { stream } from "hono/streaming";
-import rag from "./routers/rag";
+import rag from "./routers/rag.js";
 
 const app = new Hono();
 

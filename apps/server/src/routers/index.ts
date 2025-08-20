@@ -1,6 +1,6 @@
-import { User } from "../db/models/auth.model";
-import { protectedProcedure, publicProcedure } from "../lib/orpc";
-import { chatRouter } from "./chat.router";
+import { User } from "../db/models/auth.model.js";
+import { protectedProcedure, publicProcedure } from "../lib/orpc.js";
+import { chatRouter } from "./chat.router.js";
 import axios from "axios";
 import z from "zod";
 import mongoose from "mongoose";
