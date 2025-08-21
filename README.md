@@ -1,77 +1,59 @@
-# krishi-mitra
+# Krishi Mitra: A Multilingual AI-Powered Agricultural Advisor with RAG-Enabled Real-Time Decision Support
 
-This project was created with [Better-T-Stack](https://github.com/AmanVarshney01/create-better-t-stack), a modern TypeScript stack that combines Next.js, Hono, ORPC, and more.
+## Tech Stack
 
-## Features
-
-- **TypeScript** - For type safety and improved developer experience
-- **Next.js** - Full-stack React framework
-- **React Native** - Build mobile apps using React
-- **Expo** - Tools for React Native development
-- **TailwindCSS** - Utility-first CSS for rapid UI development
-- **shadcn/ui** - Reusable UI components
-- **Hono** - Lightweight, performant server framework
-- **oRPC** - End-to-end type-safe APIs with OpenAPI integration
-- **Bun** - Runtime environment
-- **Mongoose** - TypeScript-first ORM
-- **MongoDB** - Database engine
-- **Authentication** - Email & password authentication with Better Auth
-- **Husky** - Git hooks for code quality
-- **Turborepo** - Optimized monorepo build system
+Frontend: React Native Expo, Nativewind
+Backend: Hono, oRPC, mongoose, better-auth
+Other: monorepo
 
 ## Getting Started
 
-First, install the dependencies:
+### Project Structure
+
+```
+krishi-mitra/
+├── apps/
+│   ├── native/      # Mobile application (React Native, Expo)
+│   └── server/      # Backend API (Hono, ORPC)
+```
+
+1. install the dependencies:
 
 ```bash
 pnpm install
 ```
-## Database Setup
+2. setup .env in both, you can find .env.example in both
+- `apps/native/.env` 
+- `apps/server/.env`
 
-This project uses MongoDB with Mongoose.
+3. install dependencies for both apps:
 
-1. Make sure you have MongoDB set up.
-2. Update your `apps/server/.env` file with your MongoDB connection URI.
-
-3. Apply the schema to your database:
 ```bash
-pnpm db:push
+pnpm install 
 ```
 
-
-Then, run the development server:
+4. run the both:
 
 ```bash
 pnpm dev
 ```
 
-Open [http://localhost:3001](http://localhost:3001) in your browser to see the web application.
-Use the Expo Go app to run the mobile application.
-The API is running at [http://localhost:3000](http://localhost:3000).
+5. run app
+- server will be live at http://localhost:3000
+- for mobile app to run it needs "Expo Go" from playstore, 
+  scan the QR code from terminal, and it will install and run the app.
 
+6. n8n
+- see below is very complicated so you can skip it unless you want to run locally or explore it or customize it.
+- if you want to skip it, just go to apps/server/.env.example and use mine self hosted creds. that's it. 
 
+#### Setup n8n 
+- Download the [COH RAG Final.json](./r) file and import it & activate it.
+- you need to setup the credentials for the services used in the workflow. you can visit [here for more info](./README.n8n.md)
+- [important] copy the webhook Production URL and paste it in the .env file of the server app as `N8N_WEBHOOK_URL`, restart the server for the changes to take effect.
+- [more info about n8n is inside the README.n8n.md](./README.n8n.md)
 
-## Project Structure
-
-```
-krishi-mitra/
-├── apps/
-│   ├── web/         # Frontend application (Next.js)
-│   ├── native/      # Mobile application (React Native, Expo)
-│   └── server/      # Backend API (Hono, ORPC)
-```
-
-## Available Scripts
-
-- `pnpm dev`: Start all applications in development mode
-- `pnpm build`: Build all applications
-- `pnpm dev:web`: Start only the web application
-- `pnpm dev:server`: Start only the server
-- `pnpm check-types`: Check TypeScript types across all apps
-- `pnpm dev:native`: Start the React Native/Expo development server
-- `pnpm db:push`: Push schema changes to database
-- `pnpm db:studio`: Open database studio UI
 
 # Demo Video Link
 
-[![Watch the video](https://google.com)]
+Sorry I can't prepare the demo video on time :(
