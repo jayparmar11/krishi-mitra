@@ -1,19 +1,21 @@
 import { useEffect } from "react";
+import * as SplashScreen from "expo-splash-screen";
 import { View, Text, ImageBackground } from "react-native";
 import { router } from "expo-router";
 import { Leaf } from "lucide-react-native";
-
 import { authClient } from "@/lib/auth-client";
-export default function SplashScreen() {
+
+export default function SplashScreenComponent() {
   const { data: session } = authClient.useSession();
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    const timer = setTimeout(async () => {
       if (session?.user) {
         router.replace("/(tabs)");
       } else {
         router.replace("/login");
       }
+      await SplashScreen.hideAsync(); // 👈 hides native splash after 3s + redirect
     }, 3000);
 
     return () => clearTimeout(timer);
@@ -43,5 +45,3 @@ export default function SplashScreen() {
     </ImageBackground>
   );
 }
-
-// ...existing code...
