@@ -2,9 +2,10 @@
 
 ## Tech Stack
 
-Frontend: React Native Expo, Nativewind
-Backend: Hono, oRPC, mongoose, better-auth
-Other: monorepo
+**Frontend**: React Native Expo, Nativewind
+
+**Backend**: Hono, oRPC, MongoDB, Better Auth
+
 
 ## Getting Started
 
