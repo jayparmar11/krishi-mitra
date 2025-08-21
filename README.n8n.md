@@ -1,6 +1,6 @@
 # Agentic RAG Workflow for Agricultural Advisory
 
-![n8n Workflow Overview](./resources/n8n/COH%20n8n%20workflow.png)
+![n8n Workflow Overview](./resources/n8n/COH_n8n_workflow.png)
 
 This n8n workflow implements a production-ready, agentic Retrieval-Augmented Generation (RAG) system designed to function as an intelligent agricultural advisor. It combines multi-source information retrieval—including a vector database, a relational database with SQL access, and live web search—with a powerful Large Language Model (LLM) to provide accurate, context-aware, and well-sourced answers to conversational queries.
 
