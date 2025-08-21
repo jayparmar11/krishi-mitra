@@ -18,11 +18,12 @@ krishi-mitra/
 │   └── server/      # Backend API (Hono, ORPC)
 ```
 
-1. install the dependencies:
+1. clone the repo:
 
 ```bash
-pnpm install
+git clone https://github.com/jayparmar11/krishi-mitra.git
 ```
+
 2. setup .env in both, you can find .env.example in both
 - `apps/native/.env` 
 - `apps/server/.env`
